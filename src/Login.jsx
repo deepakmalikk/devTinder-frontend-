@@ -1,9 +1,17 @@
+import axios from 'axios';
 import React, { useState } from 'react'
-
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const clickHandler= async()=>{
+    const response = await axios.post("http://localhost:3000/login", {
+      emailId,
+      password
+  },
+  {withCredentials: true}
+)
+}
   return (
     <div className='flex justify-center items-center my-30'>
       
@@ -16,7 +24,7 @@ const Login = () => {
         <label className="label">Password</label>
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}className="input" placeholder="Password" />
 
-        <button className="btn btn-neutral mt-4">Login</button>
+        <button className="btn btn-neutral mt-4" onClick={clickHandler}>Login</button>
       </fieldset>
     </div>
    
