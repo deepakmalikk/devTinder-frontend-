@@ -1,16 +1,27 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addUser } from './utils/userSlice'
+
 
 const Login = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
   const clickHandler= async()=>{
+    try{
     const response = await axios.post("http://localhost:3000/login", {
-      emailId,
-      password
-  },
-  {withCredentials: true}
-)
+                  emailId,
+                  password
+              },
+              {withCredentials: true} )
+    dispatch(addUser(response.data))
+    }
+    catch(error){
+        console.log(error)
+      }
+    
 }
   return (
     <div className='flex justify-center items-center my-30'>
