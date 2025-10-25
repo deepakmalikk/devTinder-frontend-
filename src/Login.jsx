@@ -5,8 +5,8 @@ import { addUser, removeUser } from './utils/userSlice'
 
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("");
-  const [password, setPassword] = useState("");
+  const [emailId, setEmailId] = useState("deepak@gmail.com");
+  const [password, setPassword] = useState("Testing@2025");
   const dispatch = useDispatch();
 
   const clickHandler= async()=>{
@@ -16,7 +16,7 @@ const Login = () => {
                   password
               },
               {withCredentials: true} )
-              console.log(response.data)
+ 
               dispatch(addUser(response.data))
     }
     catch(error){
