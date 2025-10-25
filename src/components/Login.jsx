@@ -7,8 +7,11 @@ import { baseURL } from '../utils/constent'
 const Login = () => {
   const [emailId, setEmailId] = useState("deepak@gmail.com");
   const [password, setPassword] = useState("Testing@2025");
+  const [error,setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  
   const clickHandler= async()=>{
     try{
     const response = await axios.post(baseURL+"/login", {
@@ -22,6 +25,7 @@ const Login = () => {
     }
     catch(error){
         console.log(error)
+        setError(error.response.data || "Something went wrong")
       }
     
 }
@@ -38,6 +42,7 @@ const Login = () => {
         <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}className="input" placeholder="Password" />
 
         <button className="btn btn-neutral mt-4" onClick={clickHandler}>Login</button>
+        <p className="text-red-500">{error}</p>
       </fieldset>
     </div>
    
