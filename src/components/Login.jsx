@@ -1,23 +1,24 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { addUser, removeUser } from './utils/userSlice'
-
-
+import { addUser, removeUser } from '../utils/userSlice'
+import { useNavigate } from 'react-router-dom'
+import { baseURL } from '../utils/constent'
 const Login = () => {
   const [emailId, setEmailId] = useState("deepak@gmail.com");
   const [password, setPassword] = useState("Testing@2025");
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const clickHandler= async()=>{
     try{
-    const response = await axios.post("http://localhost:3000/login", {
+    const response = await axios.post(baseURL+"/login", {
                   emailId,
                   password
               },
               {withCredentials: true} )
  
               dispatch(addUser(response.data))
+              navigate("/feed")
     }
     catch(error){
         console.log(error)
@@ -25,7 +26,7 @@ const Login = () => {
     
 }
   return (
-    <div className='flex justify-center items-center my-30'>
+   <div className='flex justify-center items-center my-30'>
       
       <fieldset className="fieldset bg-base-300 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Login</legend>
