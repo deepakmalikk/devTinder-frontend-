@@ -10,13 +10,13 @@ const NavBar = () => {
   const user = useSelector((store)=>store.user)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(user)
+  
     const handleLogout = async() => {
         try {
           const response = await axios.post(baseURL+"/logout",
             {}, 
             {withCredentials: true}); 
-          console.log(response)
+          
           dispatch(removeUser())
           navigate("/login")
         } catch (error) {
@@ -27,7 +27,7 @@ const NavBar = () => {
      <div>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
-          <Link to="/" className="btn btn-ghost text-xl">devTinder</Link>
+          <Link to="/feed" className="btn btn-ghost text-xl">devTinder</Link>
         </div>
        
          
