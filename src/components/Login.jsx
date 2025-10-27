@@ -5,7 +5,7 @@ import { addUser, removeUser } from '../utils/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { baseURL } from '../utils/constent'
 const Login = () => {
-  const [emailId, setEmailId] = useState("deepak@gmail.com");
+  const [emailId, setEmailId] = useState("anil@gmail.com");
   const [password, setPassword] = useState("Testing@2025");
   const [error,setError] = useState("");
   const dispatch = useDispatch();

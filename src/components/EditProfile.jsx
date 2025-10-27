@@ -67,7 +67,7 @@ return (
    </div>
    <div className="toast toast-top toast-center">
 {toast && <div className="alert alert-success">
-    <span>Message sent successfully.</span>
+    <span>Data updated successfully.</span>
   </div>}
 </div>
 </>
