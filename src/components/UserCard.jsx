@@ -1,7 +1,20 @@
-
+import axios from "axios"
+import { baseURL } from "../utils/constent"
+import { removeFeed } from "../utils/feedSlice"
+import { useDispatch } from "react-redux"
 
 const userCard = ({user}) => {
-  const {firstName, lastName, about, photoUrl, gender, } =user
+  const {_id, firstName, lastName, about, photoUrl, gender, } =user
+
+  const dispatch = useDispatch();
+  const sendRequestHandler = async(status,requestId)=>{
+    try {
+      const response = await axios.post(baseURL+"/request/send/"+status+"/"+requestId ,{}, {withCredentials: true});
+      dispatch(removeFeed(requestId))
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (          
   
   <div className="card bg-base-300 w-96 shadow-sm">
@@ -15,8 +28,8 @@ const userCard = ({user}) => {
     <p>{about}</p>
    
     <div className="card-actions justify-center my-4 ">
-      <button className="btn btn-primary">Ignore</button>
-       <button className="btn btn-secondary">Interested</button>
+      <button className="btn btn-primary" onClick={()=>sendRequestHandler("ignored",_id)}>Ignore</button>
+       <button className="btn btn-secondary" onClick={()=>sendRequestHandler("interested",_id)}>Interested</button>
     </div>
   </div>
 </div>
