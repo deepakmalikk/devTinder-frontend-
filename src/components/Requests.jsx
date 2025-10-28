@@ -33,7 +33,7 @@ const Requests = () => {
         {request.map((request)=>{
             const { _id, firstName, lastName, about, photoUrl} = request.fromUserId;
             return(
-                <div key={_id} className='flex item-center justify-center m-auto p-4 border-2 rounded-lg w-1/2'>
+                <div key={_id} className='flex item-center justify-center space-in-between m-auto p-4 border-2 rounded-lg w-1/2'>
                     <div>  
                         <img className="w-20 h-20 rounded-full" src={photoUrl} alt="userPhoto" />
                     </div>
@@ -43,9 +43,9 @@ const Requests = () => {
                         <p>{about}</p>
                     </div>
                    
-           <div className='flex justify-center align-center '>
-            <button className="btn btn-info mr-2">Reject</button>
-            <button className="btn btn-success">Accept</button></div>
+           <div className='flex  item-center '>
+            <button className="btn btn-info mx-2">Reject</button>
+            <button className="btn btn-success mx-2">Accept</button></div>
           
              </div>
         )})}
