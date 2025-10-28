@@ -4,10 +4,12 @@ import { baseURL } from '../utils/constent'
 import { useDispatch } from 'react-redux'
 import { addRequest } from '../utils/requestSlice'
 import { useSelector } from 'react-redux'
+import { removeRequest } from '../utils/requestSlice'
 
 const Requests = () => {
     const request = useSelector((state)=>state.request)
     const dispatch = useDispatch()
+ 
     const fetchRequest = async()=>{
     try {
         const response = await axios.get(baseURL+"/user/requests/received", {
@@ -19,11 +21,24 @@ const Requests = () => {
             console.log(error)
         }
     }
+
+    const requestHandler = async(status,requestId)=>{
+        try {
+            const response= await axios.post(baseURL+"/request/review/"+status+ "/"+ requestId, {}, {
+                 withCredentials: true
+            })
+            dispatch(removeRequest(requestId))
+         
+            
+        } catch (error) {
+            console.log(error)
+        }
+    }
     useEffect(()=>{
         fetchRequest()
     },[])
  if(!request) return;
-    if(request.length ===0) return <h1>No Request</h1>
+    if(request.length ===0) return <h1 className='flex  text-4xl my-[50vh] items-center justify-center'>No Request</h1>
     
     return (
     <div className='  text-center my-30'> 
@@ -32,6 +47,9 @@ const Requests = () => {
     
         {request.map((request)=>{
             const { _id, firstName, lastName, about, photoUrl} = request.fromUserId;
+            console.log(request);
+           const requestId = request._id;
+         
             return(
                 <div key={_id} className='flex item-center justify-center space-in-between m-auto p-4 border-2 rounded-lg w-1/2'>
                     <div>  
@@ -44,8 +62,8 @@ const Requests = () => {
                     </div>
                    
            <div className='flex  item-center '>
-            <button className="btn btn-info mx-2">Reject</button>
-            <button className="btn btn-success mx-2">Accept</button></div>
+            <button className="btn btn-info mx-2" onClick={()=>requestHandler("rejected",requestId)}>Reject</button>
+            <button className="btn btn-success mx-2" onClick={()=>requestHandler("accepted",requestId)}>Accept</button></div>
           
              </div>
         )})}
