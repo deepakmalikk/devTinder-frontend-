@@ -23,7 +23,7 @@ const NavBar = () => {
           console.log(error)
         }
     }
-    return (
+    return (handleLogout &&(
      <div>
       <div className="navbar bg-base-300 shadow-sm">
         <div className="flex-1">
@@ -66,7 +66,7 @@ const NavBar = () => {
                 <Link to="/request">Request</Link>
               </li>
               <li>
-                <a onClick={handleLogout}request>Logout</a>
+                <a onClick={handleLogout}>Logout</a>
               </li>
             </ul>
           </div>
@@ -75,7 +75,8 @@ const NavBar = () => {
       </div>
 
      </div>
-  )
+  ) 
+  ) 
 }
 
 export default NavBar;

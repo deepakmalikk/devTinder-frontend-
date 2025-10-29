@@ -22,12 +22,14 @@ const Body = () => {
       dispatch(addUser(response.data))
     }
 
-    catch(error){
-      if(error.status==401){
-        navigate("/login")
+    catch (error) {
+      if (error.response && error.response.status === 401) {
+        navigate("/login");
+      } else {
+        console.log(error);
       }
-      console.log(error)
     }
+
   };
 
   useEffect(()=>{
@@ -36,7 +38,7 @@ const Body = () => {
 
   return (
     <div>
-      <NavBar />
+      {userData && <NavBar />}
       <Outlet/>
       <Footer/>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { baseURL } from '../utils/constent'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,6 +9,7 @@ const feed = () => {
 
   const feed = useSelector((store)=>store.feed)
   const dispatch = useDispatch()
+  const [error, setError] = useState("")
   const getFeed = async()=>{
     try {
       if(feed){
@@ -18,12 +19,13 @@ const feed = () => {
        
       dispatch(addFeed(response?.data?.data));
     } catch (error) {
-      console.log(error)
+      setError(error.response.data || "Something went wrong")
     } 
   }
    useEffect(()=>{
     getFeed()
    },[]);
+
 if (!feed) return;
 
 if(feed.length <= 0){
