@@ -5,8 +5,12 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  build :{
+  css: {
+    // Use PostCSS as the transformer instead of Lightning CSS
+    transformer: 'postcss',
+  },
+  build: {
+    // Keep esbuild for minification
     cssMinify: 'esbuild',
-
   },
 })
