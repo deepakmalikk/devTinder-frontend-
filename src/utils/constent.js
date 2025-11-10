@@ -1,1 +1,1 @@
-export const baseURL = "/apivit";
+export const baseURL = "/api";
