@@ -44,7 +44,18 @@ const Login = () => {
   };
 
   const handleSignUp = async () => {
+
     setError("");
+
+    if (firstName.trim().length < 3) {
+      setError("First name must be at least 3 characters long");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
@@ -82,7 +93,10 @@ const Login = () => {
                   <input
                     type="text"
                     value={firstName}
+                    placeholder="Enter your First Name"
                     className="input input-bordered w-full max-w-xs"
+                    minlength={3}
+                    required
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </label>
@@ -93,6 +107,7 @@ const Login = () => {
                   <input
                     type="text"
                     value={lastName}
+                    placeholder="Enter your Last Name"
                     className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setLastName(e.target.value)}
                   />
